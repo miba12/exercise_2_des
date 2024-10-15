@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>des</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="des_mb_files/libs/clipboard/clipboard.min.js"></script>
+<script src="des_mb_files/libs/quarto-html/quarto.js"></script>
+<script src="des_mb_files/libs/quarto-html/popper.min.js"></script>
+<script src="des_mb_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="des_mb_files/libs/quarto-html/anchor.min.js"></script>
+<link href="des_mb_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="des_mb_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="des_mb_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="des_mb_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="des_mb_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">des</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="start-with-importing" class="level3">
+<h3 class="anchored" data-anchor-id="start-with-importing">Start with importing</h3>
+</section>
+<section id="classes" class="level2">
+<h2 class="anchored" data-anchor-id="classes">Classes</h2>
+<p><strong>Class to store global parameter values</strong></p>
+<p><strong>Class representing patients coming in to the GP surgery</strong></p>
+<p><strong>Class representing callers phoning the GP surgery</strong></p>
+<p><strong>Class representing our model of the GP surgery</strong></p>
+<p><strong>Class representing a trial for our simulation</strong></p>
+<p><strong>Run a trial using the parameters from the g class and print the results</strong></p>
+<div id="1ec9b1a7" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>            Mean Queue Time Reg  Mean Queue Time GP  \
+Run Number                                            
+1                          81.4                 6.5   
+2                          62.8                47.6   
+3                          15.3                87.4   
+4                          54.9                33.3   
+5                          51.5                21.3   
+6                          62.4                14.1   
+7                          60.1                33.0   
+8                          49.8                50.1   
+9                          81.4                17.6   
+10                         62.1                30.0   
+
+            Mean Queue Time Book Test  Mean Queue Time Call  \
+Run Number                                                    
+1                                90.6                  78.1   
+2                                70.2                  63.7   
+3                                19.7                  15.9   
+4                                51.5                  50.4   
+5                                43.4                  40.7   
+6                                60.9                  62.2   
+7                                63.6                  55.7   
+8                                44.8                  51.1   
+9                                85.3                  86.9   
+10                               70.3                  58.2   
+
+            GP Utilisation - Percentage  Receptionist Utilisation - Percentage  
+Run Number                                                                      
+1                                  75.4                                   99.8  
+2                                  95.4                                  100.3  
+3                                 100.3                                   99.2  
+4                                  99.0                                   99.9  
+5                                  87.8                                   98.8  
+6                                  89.5                                  100.4  
+7                                  94.7                                  100.4  
+8                                  99.7                                   99.8  
+9                                  82.6                                  100.2  
+10                                 96.0                                  101.2  
+           Call Start Time  Queue Time Call  Call Answered At  Call End Time  \
+Caller ID                                                                      
+38              209.060421       122.364143        331.424564     332.087608   
+19              161.492744       101.944790        263.437535     269.007465   
+15              132.525050       101.602765        234.127815     235.285770   
+13               95.500118        24.097539        119.597657     120.584656   
+31              308.248399       101.467069        409.715467     414.969199   
+34              306.518964        77.575285        384.094249     387.624111   
+32              311.555606        92.365793        403.921399     406.253114   
+28              305.556127        86.343595        391.899722     404.126815   
+38              373.084044              NaN               NaN            NaN   
+9               108.054171        26.401167        134.455339     141.260200   
+7                69.748024        27.141438         96.889462      97.118733   
+38              327.818136        87.297756        415.115892     417.908744   
+8                74.423154        14.646380         89.069535      91.327480   
+11              159.274952        35.360730        194.635682     214.095658   
+36              373.365799        26.984756        400.350555     402.101593   
+28              250.028913        15.028479        265.057392     277.137423   
+30              296.840124        72.291732        369.131856     379.083034   
+4                23.070645         7.957227         31.027871      36.029995   
+6                33.743899         0.189689         33.933588      34.478348   
+47              425.895842              NaN               NaN            NaN   
+15              133.869611        20.703149        154.572760     163.622018   
+1                 0.000000         2.986034          2.986034       9.905031   
+6                23.935013        43.549511         67.484525      69.898281   
+31              324.092494        10.771323        334.863817     334.876209   
+39              392.184238        31.637201        423.821439     424.955187   
+
+           Run     What  
+Caller ID                
+38           1  Callers  
+19           9  Callers  
+15           9  Callers  
+13           7  Callers  
+31           2  Callers  
+34           5  Callers  
+32           7  Callers  
+28           2  Callers  
+38           7  Callers  
+9            4  Callers  
+7            6  Callers  
+38           5  Callers  
+8            8  Callers  
+11           4  Callers  
+36           3  Callers  
+28           3  Callers  
+30           7  Callers  
+4            2  Callers  
+6            3  Callers  
+47          10  Callers  
+15           8  Callers  
+1            3  Callers  
+6            7  Callers  
+31           3  Callers  
+39           3  Callers  
+            Arrival Time  Queue Time Reg  Time Seen For Registration  \
+Patient ID                                                             
+124           346.608477             NaN                         NaN   
+2               3.787123        2.535967                    6.323090   
+161           471.921642             NaN                         NaN   
+52            155.091581        5.272454                  160.364035   
+114           310.961910      107.483380                  418.445291   
+116           307.861314       88.181400                  396.042715   
+148           418.826591             NaN                         NaN   
+126           333.266003       99.870876                  433.136879   
+113           301.928842       90.563762                  392.492603   
+10             19.112076       16.256206                   35.368283   
+52            139.014682       53.723080                  192.737762   
+105           318.023911      113.106454                  431.130365   
+151           415.001361             NaN                         NaN   
+141           397.337325             NaN                         NaN   
+172           473.586002             NaN                         NaN   
+87            243.830459       58.017581                  301.848040   
+13             29.441719       23.169872                   52.611591   
+102           311.933861       12.832834                  324.766695   
+124           343.795021       93.387850                  437.182871   
+112           309.331845      107.935936                  417.267781   
+78            191.257492       95.738079                  286.995572   
+82            217.865650       80.806710                  298.672360   
+176           475.444458             NaN                         NaN   
+27             73.286083       10.167880                   83.453963   
+59            163.202511      107.316066                  270.518576   
+
+            Queue Time GP  Time Seen By GP  Queue Time Book Test  \
+Patient ID                                                         
+124                   NaN              NaN                   NaN   
+2                0.000000         8.338359                   NaN   
+161                   NaN              NaN                   NaN   
+52             103.860461       272.176639                   NaN   
+114                   NaN              NaN                   NaN   
+116             76.060859       472.719761                   NaN   
+148                   NaN              NaN                   NaN   
+126                   NaN              NaN                   NaN   
+113             62.853040       463.814965                   NaN   
+10               3.182817        39.280533                   NaN   
+52              31.653331       224.837727                   NaN   
+105             41.169573       475.785810                   NaN   
+151                   NaN              NaN                   NaN   
+141                   NaN              NaN                   NaN   
+172                   NaN              NaN                   NaN   
+87              69.525748       372.196716                   NaN   
+13               0.000000        55.020682                   NaN   
+102            130.803475       458.293538                   NaN   
+124                   NaN              NaN                   NaN   
+112              6.664801       428.603440                   NaN   
+78              28.187128       316.223501                   NaN   
+82              85.063122       384.137995                   NaN   
+176                   NaN              NaN                   NaN   
+27              48.458339       132.513348                   NaN   
+59               0.000000       271.426797                   NaN   
+
+            Time Test Booking Started  Departure Time  Run      What  
+Patient ID                                                            
+124                               NaN             NaN   10  Patients  
+2                                 NaN             NaN   10  Patients  
+161                               NaN             NaN    3  Patients  
+52                                NaN             NaN    3  Patients  
+114                               NaN             NaN    2  Patients  
+116                               NaN             NaN    7  Patients  
+148                               NaN             NaN    7  Patients  
+126                               NaN             NaN    4  Patients  
+113                               NaN             NaN    4  Patients  
+10                                NaN             NaN    1  Patients  
+52                                NaN             NaN    6  Patients  
+105                               NaN             NaN    9  Patients  
+151                               NaN             NaN   10  Patients  
+141                               NaN             NaN    6  Patients  
+172                               NaN             NaN    8  Patients  
+87                                NaN             NaN    4  Patients  
+13                                NaN             NaN    1  Patients  
+102                               NaN             NaN    3  Patients  
+124                               NaN             NaN    8  Patients  
+112                               NaN             NaN   10  Patients  
+78                                NaN             NaN   10  Patients  
+82                                NaN             NaN    2  Patients  
+176                               NaN             NaN    4  Patients  
+27                                NaN             NaN    3  Patients  
+59                                NaN             NaN    9  Patients  
+=== Receptionist Stats ===
+The median wait for registration across 10 was 61.1 minutes
+The median wait for booking a test was 62.2 minutes
+The median wait for callers to have their call answered was 57.0 minutes
+The median utilisation for a receptionist across 10 was 100.05000000000001%
+=== GP Stats ===
+The median wait for a GP across 10 was 31.5 minutes
+The median utilisation for a GP across 10 was 95.05000000000001%</code></pre>
+</div>
+</div>
+<p><strong>Create some summaries and visualisations for averages across the trial</strong></p>
+<p>Let’s set up a reusable sequence of colours that can give our plotly plots a consistent feel/identity. This uses some colours from the NHS identity guidelines that should work well when placed next to each other Full details of the NHS identity guidelines can be found <a href="https://www.england.nhs.uk/nhsidentity/identity-guidelines/colours/">here</a>.</p>
+<ul>
+<li>If we pass this to something with just a single colour in the plot, it will just take the first colour from the sequence (NHS Blue)</li>
+<li>If we pass it to a plot that has categories, it will assign colours to categories in the order given in this list</li>
+</ul>
+<p><strong>Bar plot - average waits per stage per run</strong></p>
+<p>After we use the px.bar function to create our plot, there will be a few additional things we want to do to the plot before displaying it. There is a limit to what can be done in the original function call as there are only so many parameters - these little extra touches just make the plot as readable and polished-looking as possible!</p>
+<p>This will tidy up the subtitles of each ‘facet’ within our plot (the mini-graph relating) to each of our metrics This uses what’s called a ‘lambda’ function, which is a little temporary function that in this case iterates through the annotation text and replaces the string ‘variable=’ with an empty string, which just tidies up the headers in this case so it only contains the actual name of the variable</p>
+<p><code>{python} average_waits_fig.for_each_annotation(lambda a: a.update(text=a.text.replace("variable=", "")))</code></p>
+<div id="dc905dc2" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>                            <div id="c1ed8e27-aa51-479d-b862-8767ec58c6d2" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c1ed8e27-aa51-479d-b862-8767ec58c6d2")) {                    Plotly.newPlot(                        "c1ed8e27-aa51-479d-b862-8767ec58c6d2",                        [{"alignmentgroup":"True","hovertemplate":"variable=Mean Queue Time Reg\u003cbr\u003eAverage Wait (Mins)=%{x}\u003cbr\u003eRun Number=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[81.4,62.8,15.3,54.9,51.5,62.4,60.1,49.8,81.4,62.1],"xaxis":"x","y":[1,2,3,4,5,6,7,8,9,10],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"variable=Mean Queue Time GP\u003cbr\u003eAverage Wait (Mins)=%{x}\u003cbr\u003eRun Number=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[6.5,47.6,87.4,33.3,21.3,14.1,33.0,50.1,17.6,30.0],"xaxis":"x2","y":[1,2,3,4,5,6,7,8,9,10],"yaxis":"y2","type":"bar"},{"alignmentgroup":"True","hovertemplate":"variable=Mean Queue Time Book Test\u003cbr\u003eAverage Wait (Mins)=%{x}\u003cbr\u003eRun Number=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[90.6,70.2,19.7,51.5,43.4,60.9,63.6,44.8,85.3,70.3],"xaxis":"x3","y":[1,2,3,4,5,6,7,8,9,10],"yaxis":"y3","type":"bar"},{"alignmentgroup":"True","hovertemplate":"variable=Mean Queue Time Call\u003cbr\u003eAverage Wait (Mins)=%{x}\u003cbr\u003eRun Number=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[78.1,63.7,15.9,50.4,40.7,62.2,55.7,51.1,86.9,58.2],"xaxis":"x4","y":[1,2,3,4,5,6,7,8,9,10],"yaxis":"y4","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,0.235],"title":{"text":"Average Wait (Mins)"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Run Number"}},"xaxis2":{"anchor":"y2","domain":[0.255,0.49],"matches":"x","title":{"text":"Average Wait (Mins)"}},"yaxis2":{"anchor":"x2","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis3":{"anchor":"y3","domain":[0.51,0.745],"matches":"x","title":{"text":"Average Wait (Mins)"}},"yaxis3":{"anchor":"x3","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis4":{"anchor":"y4","domain":[0.7649999999999999,0.9999999999999999],"matches":"x","title":{"text":"Average Wait (Mins)"}},"yaxis4":{"anchor":"x4","domain":[0.0,1.0],"matches":"y","showticklabels":false},"annotations":[{"font":{},"showarrow":false,"text":"Mean Queue Time Reg","x":0.1175,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Mean Queue Time GP","x":0.3725,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Mean Queue Time Book Test","x":0.6275,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Mean Queue Time Call","x":0.8824999999999998,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"legend":{"tracegroupgap":0},"title":{"text":"Average Waits (Minutes) For Each Stage of the Patient Journey - by Run"},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('c1ed8e27-aa51-479d-b862-8767ec58c6d2');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+<p>Here we are going to update the layout to ensure that we have a label for every run number in our y axis By default, plotly tries to intelligently choose a scale - but for this, it makes more sense to include a label for every row (unless we have lots of runs, in which case we won’t apply this correction)</p>
+<p>Finally, we force plotly to display the plot in the interactive window. If we don’t use this then only the final plotly plot we create will actually be displayed <code>{python}average_waits_fig.show()</code></p>
+<div id="97ea3d21" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>                            <div id="e6991eb3-dc99-4c1f-8da6-cfb651a0d255" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("e6991eb3-dc99-4c1f-8da6-cfb651a0d255")) {                    Plotly.newPlot(                        "e6991eb3-dc99-4c1f-8da6-cfb651a0d255",                        [{"alignmentgroup":"True","hovertemplate":"variable=Mean Queue Time Reg\u003cbr\u003eAverage Wait (Mins)=%{x}\u003cbr\u003eRun Number=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[81.4,62.8,15.3,54.9,51.5,62.4,60.1,49.8,81.4,62.1],"xaxis":"x","y":[1,2,3,4,5,6,7,8,9,10],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"variable=Mean Queue Time GP\u003cbr\u003eAverage Wait (Mins)=%{x}\u003cbr\u003eRun Number=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[6.5,47.6,87.4,33.3,21.3,14.1,33.0,50.1,17.6,30.0],"xaxis":"x2","y":[1,2,3,4,5,6,7,8,9,10],"yaxis":"y2","type":"bar"},{"alignmentgroup":"True","hovertemplate":"variable=Mean Queue Time Book Test\u003cbr\u003eAverage Wait (Mins)=%{x}\u003cbr\u003eRun Number=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[90.6,70.2,19.7,51.5,43.4,60.9,63.6,44.8,85.3,70.3],"xaxis":"x3","y":[1,2,3,4,5,6,7,8,9,10],"yaxis":"y3","type":"bar"},{"alignmentgroup":"True","hovertemplate":"variable=Mean Queue Time Call\u003cbr\u003eAverage Wait (Mins)=%{x}\u003cbr\u003eRun Number=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[78.1,63.7,15.9,50.4,40.7,62.2,55.7,51.1,86.9,58.2],"xaxis":"x4","y":[1,2,3,4,5,6,7,8,9,10],"yaxis":"y4","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,0.235],"title":{"text":"Average Wait (Mins)"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Run Number"},"dtick":1},"xaxis2":{"anchor":"y2","domain":[0.255,0.49],"matches":"x","title":{"text":"Average Wait (Mins)"}},"yaxis2":{"anchor":"x2","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis3":{"anchor":"y3","domain":[0.51,0.745],"matches":"x","title":{"text":"Average Wait (Mins)"}},"yaxis3":{"anchor":"x3","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis4":{"anchor":"y4","domain":[0.7649999999999999,0.9999999999999999],"matches":"x","title":{"text":"Average Wait (Mins)"}},"yaxis4":{"anchor":"x4","domain":[0.0,1.0],"matches":"y","showticklabels":false},"annotations":[{"font":{},"showarrow":false,"text":"Mean Queue Time Reg","x":0.1175,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Mean Queue Time GP","x":0.3725,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Mean Queue Time Book Test","x":0.6275,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Mean Queue Time Call","x":0.8824999999999998,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"legend":{"tracegroupgap":0},"title":{"text":"Average Waits (Minutes) For Each Stage of the Patient Journey - by Run"},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('e6991eb3-dc99-4c1f-8da6-cfb651a0d255');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+<section id="bar-plot---waits-per-stage-per-run" class="level2">
+<h2 class="anchored" data-anchor-id="bar-plot---waits-per-stage-per-run">Bar plot - waits per stage per run</h2>
+<div id="b87a62b2" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>                            <div id="abcacfe3-856e-4a81-ab9b-9f7e9910eca7" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("abcacfe3-856e-4a81-ab9b-9f7e9910eca7")) {                    Plotly.newPlot(                        "abcacfe3-856e-4a81-ab9b-9f7e9910eca7",                        [{"alignmentgroup":"True","hovertemplate":"Run Number=1\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x","y":[81.4,6.5,90.6,78.1],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=2\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x2","y":[62.8,47.6,70.2,63.7],"yaxis":"y2","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=3\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x3","y":[15.3,87.4,19.7,15.9],"yaxis":"y3","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=4\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x4","y":[54.9,33.3,51.5,50.4],"yaxis":"y4","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=5\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x5","y":[51.5,21.3,43.4,40.7],"yaxis":"y5","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=6\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x6","y":[62.4,14.1,60.9,62.2],"yaxis":"y6","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=7\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x7","y":[60.1,33.0,63.6,55.7],"yaxis":"y7","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=8\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x8","y":[49.8,50.1,44.8,51.1],"yaxis":"y8","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=9\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x9","y":[81.4,17.6,85.3,86.9],"yaxis":"y9","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Run Number=10\u003cbr\u003e=%{x}\u003cbr\u003eQueue Time (minutes)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Reg","GP","Book Test","Call"],"xaxis":"x10","y":[62.1,30.0,70.3,58.2],"yaxis":"y10","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,0.08200000000000002],"title":{"text":""},"dtick":1},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Queue Time (minutes)"}},"xaxis2":{"anchor":"y2","domain":[0.10200000000000002,0.18400000000000005],"matches":"x","title":{"text":""},"dtick":1},"yaxis2":{"anchor":"x2","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis3":{"anchor":"y3","domain":[0.20400000000000004,0.28600000000000003],"matches":"x","title":{"text":""},"dtick":1},"yaxis3":{"anchor":"x3","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis4":{"anchor":"y4","domain":[0.30600000000000005,0.38800000000000007],"matches":"x","title":{"text":""},"dtick":1},"yaxis4":{"anchor":"x4","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis5":{"anchor":"y5","domain":[0.4080000000000001,0.4900000000000001],"matches":"x","title":{"text":""},"dtick":1},"yaxis5":{"anchor":"x5","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis6":{"anchor":"y6","domain":[0.5100000000000001,0.5920000000000001],"matches":"x","title":{"text":""},"dtick":1},"yaxis6":{"anchor":"x6","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis7":{"anchor":"y7","domain":[0.6120000000000001,0.6940000000000002],"matches":"x","title":{"text":""},"dtick":1},"yaxis7":{"anchor":"x7","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis8":{"anchor":"y8","domain":[0.7140000000000001,0.796],"matches":"x","title":{"text":""},"dtick":1},"yaxis8":{"anchor":"x8","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis9":{"anchor":"y9","domain":[0.8160000000000002,0.8980000000000001],"matches":"x","title":{"text":""},"dtick":1},"yaxis9":{"anchor":"x9","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis10":{"anchor":"y10","domain":[0.9180000000000001,1.0],"matches":"x","title":{"text":""},"dtick":1},"yaxis10":{"anchor":"x10","domain":[0.0,1.0],"matches":"y","showticklabels":false},"annotations":[{"font":{},"showarrow":false,"text":"Run 1","x":0.04100000000000001,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 2","x":0.14300000000000004,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 3","x":0.24500000000000005,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 4","x":0.3470000000000001,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 5","x":0.44900000000000007,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 6","x":0.5510000000000002,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 7","x":0.6530000000000001,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 8","x":0.7550000000000001,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 9","x":0.8570000000000002,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"Run 10","x":0.9590000000000002,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"legend":{"tracegroupgap":0},"title":{"text":"Average Waits (Minutes) For Each Stage of the Patient Journey - by Run"},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('abcacfe3-856e-4a81-ab9b-9f7e9910eca7');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+<section id="box-plot---resource-utilisation-by-resource" class="level2">
+<h2 class="anchored" data-anchor-id="box-plot---resource-utilisation-by-resource">Box plot - resource utilisation by resource</h2>
+<div id="fa37010f" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>                            <div id="c5804712-c77a-4273-9b8c-be47c008e433" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c5804712-c77a-4273-9b8c-be47c008e433")) {                    Plotly.newPlot(                        "c5804712-c77a-4273-9b8c-be47c008e433",                        [{"alignmentgroup":"True","boxpoints":"all","hovertemplate":"Resource Utilisation Across Run (%)=%{x}\u003cbr\u003e=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#005EB8"},"name":"","notched":false,"offsetgroup":"","orientation":"h","showlegend":false,"x":[75.4,95.4,100.3,99.0,87.8,89.5,94.7,99.7,82.6,96.0,99.8,100.3,99.2,99.9,98.8,100.4,100.4,99.8,100.2,101.2],"x0":" ","xaxis":"x","y":["GP Utilisation - Percentage","GP Utilisation - Percentage","GP Utilisation - Percentage","GP Utilisation - Percentage","GP Utilisation - Percentage","GP Utilisation - Percentage","GP Utilisation - Percentage","GP Utilisation - Percentage","GP Utilisation - Percentage","GP Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage","Receptionist Utilisation - Percentage"],"y0":" ","yaxis":"y","type":"box"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Resource Utilisation Across Run (%)"},"range":[0,105]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":""}},"legend":{"tracegroupgap":0},"title":{"text":"Resource Utilisation"},"boxmode":"group"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('c5804712-c77a-4273-9b8c-be47c008e433');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+<section id="bar-plot---resource-utilisation-per-run" class="level2">
+<h2 class="anchored" data-anchor-id="bar-plot---resource-utilisation-per-run">Bar plot - resource utilisation per run</h2>
+<p>We’re going to use the same data as for our boxplot, but we’re more interested in looking at the utilisation of resources within a single run rather than the consistency of resource use of a particular resource type, which the boxplot is better at demonstrating. So once again - same data, different focus!</p>
+<div id="49065b4c" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>                            <div id="7c0d118c-9c76-4790-b3fc-e2ee97fc3b7a" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("7c0d118c-9c76-4790-b3fc-e2ee97fc3b7a")) {                    Plotly.newPlot(                        "7c0d118c-9c76-4790-b3fc-e2ee97fc3b7a",                        [{"alignmentgroup":"True","hovertemplate":"=GP Utilisation - Percentage\u003cbr\u003eRun Number=%{x}\u003cbr\u003eResource Utilisation Across Run (%)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"GP Utilisation - Percentage","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"GP Utilisation - Percentage","offsetgroup":"GP Utilisation - Percentage","orientation":"v","showlegend":true,"textposition":"auto","x":[1,2,3,4,5,6,7,8,9,10],"xaxis":"x","y":[75.4,95.4,100.3,99.0,87.8,89.5,94.7,99.7,82.6,96.0],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"=Receptionist Utilisation - Percentage\u003cbr\u003eRun Number=%{x}\u003cbr\u003eResource Utilisation Across Run (%)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Receptionist Utilisation - Percentage","marker":{"color":"#FFB81C","pattern":{"shape":""}},"name":"Receptionist Utilisation - Percentage","offsetgroup":"Receptionist Utilisation - Percentage","orientation":"v","showlegend":true,"textposition":"auto","x":[1,2,3,4,5,6,7,8,9,10],"xaxis":"x","y":[99.8,100.3,99.2,99.9,98.8,100.4,100.4,99.8,100.2,101.2],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Run Number"},"dtick":1},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Resource Utilisation Across Run (%)"}},"legend":{"title":{"text":""},"tracegroupgap":0},"title":{"text":"Resource Utilisation"},"barmode":"group"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('7c0d118c-9c76-4790-b3fc-e2ee97fc3b7a');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+<section id="create-some-summaries-and-visualisations-for-call-stats" class="level1">
+<h1>Create some summaries and visualisations for call stats</h1>
+<section id="dataframe---call-answering-stats" class="level2">
+<h2 class="anchored" data-anchor-id="dataframe---call-answering-stats">Dataframe - Call Answering Stats</h2>
+<p>It would be good to be able to display whether callers had their call answered or not - this can give us a quick overview of whether the system has been particularly overloaded on different runs. If a large number of callers never get their call answered, this suggests we need more receptionists (as they are the ones dealing will registration, test booking and calls in this model)</p>
+<div id="c5e1cd7c" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-stdout">
+<pre><code>Call Answered  Run  Call Answered  Call Not Answered Before Closing Time
+0                1             49                                     17
+1                2             32                                     14
+2                3             44                                      4
+3                4             26                                      8
+4                5             42                                      8
+5                6             32                                     17
+6                7             37                                     12
+7                8             55                                      7
+8                9             38                                     13
+9               10             37                                     15</code></pre>
+</div>
+</div>
+</section>
+<section id="stacked-bar-plot---percentage-of-calls-answered---by-run" class="level2">
+<h2 class="anchored" data-anchor-id="stacked-bar-plot---percentage-of-calls-answered---by-run">Stacked Bar Plot - Percentage of Calls Answered - by run</h2>
+<p>We can now use the long version of this dataframe to create a stacked bar plot exploring the total number of calls received - and those not answered - within the plot</p>
+<div id="8390d850" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<div>                            <div id="616941a1-1d7c-4f88-a21a-b2b4498fc114" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("616941a1-1d7c-4f88-a21a-b2b4498fc114")) {                    Plotly.newPlot(                        "616941a1-1d7c-4f88-a21a-b2b4498fc114",                        [{"alignmentgroup":"True","hovertemplate":"Call Answered=Call Answered\u003cbr\u003eRun=%{x}\u003cbr\u003eNumber of Calls=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Call Answered","marker":{"color":"#005EB8","pattern":{"shape":""}},"name":"Call Answered","offsetgroup":"Call Answered","orientation":"v","showlegend":true,"textposition":"auto","x":[1,2,3,4,5,6,7,8,9,10],"xaxis":"x","y":[49,32,44,26,42,32,37,55,38,37],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Call Answered=Call Not Answered Before Closing Time\u003cbr\u003eRun=%{x}\u003cbr\u003eNumber of Calls=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Call Not Answered Before Closing Time","marker":{"color":"#FFB81C","pattern":{"shape":""}},"name":"Call Not Answered Before Closing Time","offsetgroup":"Call Not Answered Before Closing Time","orientation":"v","showlegend":true,"textposition":"auto","x":[1,2,3,4,5,6,7,8,9,10],"xaxis":"x","y":[17,14,4,8,8,17,12,7,13,15],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Run"},"dtick":1},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Number of Calls"}},"legend":{"title":{"text":"Call Answered"},"tracegroupgap":0},"title":{"text":"Number of Calls - How Many Were Answered in Opening Hours?"},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('616941a1-1d7c-4f88-a21a-b2b4498fc114');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+<section id="strip-plot---arrival-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="strip-plot---arrival-patterns">Strip Plot - Arrival Patterns</h2>
+<p>Finally, let’s make a scatterplot that can help us to just check that the patterns of arrivals across the day makes sense. Are the callers and patients arriving in an intermingled fashion and do we have some of each? This plot might be of more use for debugging than actually understanding the model behaviour - although it can also be useful to demonstrate that the arrival times are not fixed across the different runs, which can help people to understand the value and functioning of the model</p>
+<div id="2fba6bd4" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display">
+<div>                            <div id="5d96a624-485a-4a78-86a1-b96e9ab33596" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("5d96a624-485a-4a78-86a1-b96e9ab33596")) {                    Plotly.newPlot(                        "5d96a624-485a-4a78-86a1-b96e9ab33596",                        [{"alignmentgroup":"True","boxpoints":"all","fillcolor":"rgba(255,255,255,0)","hoveron":"points","hovertemplate":"What=Patients\u003cbr\u003eArrival Time (Simulation Minute)=%{x}\u003cbr\u003eRun=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Patients","line":{"color":"rgba(255,255,255,0)"},"marker":{"color":"#005EB8"},"name":"Patients","offsetgroup":"Patients","orientation":"v","pointpos":0,"showlegend":true,"x":[0.0,7.443595937054557,9.83569384174886,13.176089298364557,13.926627665417158,15.435280927129096,16.13887629149478,16.433630259113745,18.041489229168814,19.11207607898457,27.38246043517605,28.824576534589646,29.441718852030984,30.159061507036295,32.32079525130564,36.43687933957843,37.69303796931558,37.72757990996014,37.772687564086205,40.22975666526975,40.67624449052764,43.01993501229967,47.65562811159967,47.94547946391028,51.11725366891407,52.06503570370997,65.12330420005964,66.40583831590463,69.55989964223838,78.82129113475273,79.27821210905246,79.60198634728916,79.8915558106352,83.00124380856025,83.84192817159327,92.5328054158205,93.01950941967355,93.99300366203447,96.01986856441157,96.65989552025614,104.6451725709032,105.87963064304475,109.09233692132072,111.96735523921264,116.53747741204467,119.85434036145834,123.34531141569826,123.5281306153902,125.14688011980658,126.6056308425397,129.02484888978404,130.6009909984876,132.3399808964514,132.63299468934804,136.6802148250331,145.4439748081485,146.97076145371062,147.73848174613437,148.01200639787595,148.0300465128057,151.6209195284454,153.47323469462893,156.15947111301267,159.61567071329893,160.01696021385914,162.21840113031584,166.81535330294298,167.06626256031961,169.31980194038806,174.23878846571665,174.89355618479505,175.69190927136924,176.0546250153411,183.05738627381166,183.333715239387,184.34820949876016,190.84820410726007,194.1244191892226,194.2180230359203,202.0971578214551,205.33183880431082,206.90672037638768,207.9335530712467,210.2121171331707,212.78875257943338,214.96508856037403,217.07298333644135,220.98869522727693,231.26354419495453,231.38863012319177,232.8521877452761,236.66740584044615,243.7541915432136,244.22794568443354,244.52863390611935,246.87510309266895,246.9588745065451,254.56947546429836,269.1515449806428,269.3195198829852,270.15495603464575,273.3890442983294,275.5456287498635,277.97458927667014,284.4368439958236,286.7087405051037,291.3226769166023,291.3499990565571,292.61375378409497,293.34771365411854,295.1745149251161,297.62017709073183,300.76678764061234,304.130938427851,306.84331610650116,315.9477798127371,316.7008054146092,317.80072427626885,318.7904240742954,330.2485053429227,330.67264465615324,330.9016902956162,336.21691081894903,339.33734446706774,351.2487681636589,354.0661637632627,355.23540539766265,357.1726825771986,357.7988134930066,358.55743658731734,362.6928540896686,364.4569270208732,368.2532450075902,370.276062240814,373.98510207683034,375.7670306838131,376.28105245074335,376.79706794576765,377.82840103928305,383.7783962333974,388.9152923456731,390.50386302788735,391.43210039233196,394.0243533997987,396.6400387046239,400.8640874247184,400.972180890076,402.8011862943569,403.07793274857727,403.1851605029605,406.20852936488734,407.61108679818165,414.7738442042996,414.9976672691763,423.3741066292588,426.1129135654321,432.54727922579633,439.3202341872003,440.6611030231503,442.0180405733391,448.8350526560723,449.6281735233174,451.25696182744684,453.6696918021088,453.9030759820322,454.9504075105315,455.03811305075,456.03845741971907,456.29039462517864,468.1275992468126,478.0631984395659,479.2889843196003,0.0,6.225120755274356,10.057783589134964,11.263989742849986,13.123953678144058,17.80995931311024,19.70890219135116,23.699217708425376,29.16590271448475,29.20970372883329,29.22276080353569,29.78196361350903,29.78739993095827,34.66806450741592,38.81843199367367,39.122397773277655,42.971137823867814,49.433522642461156,50.25643528656382,51.488923786251625,52.94902774175205,56.49801060233968,57.317277447081686,58.16130659777824,66.66942381990265,67.35598139337614,69.39801393624089,73.13081502591339,75.17920725165564,75.93956971998983,79.86502821719054,82.82684380714626,87.48473125249227,89.98423563764383,92.72520844590312,93.0399494194875,98.74638073863142,99.58297532938947,99.75425589723679,108.97491919039435,110.67035589932546,111.22169202035347,119.97157719279527,125.63718837095925,126.54431847693212,127.9980005117538,131.227630425352,131.79698608289908,133.66592569355402,135.25709228550116,135.3726680662479,135.53354180639215,135.56153073313033,137.0208966378963,137.78166418799003,140.05925971088095,141.8471747905013,142.39483705097405,145.4669092804418,158.69124332521102,158.85157427464787,159.97326696858568,164.45469231117318,167.44429097777382,176.2288881987413,177.03434368942186,178.1994272001221,180.11422937587747,180.8333582507977,182.51497019744963,184.48627043961113,189.23123975118693,196.942792444834,197.1640088821704,204.89354821317866,205.6306755438386,208.0560645003222,212.170861802748,212.56504611773852,213.84897698367513,215.17815479228793,217.86565019839165,223.5882052514593,224.360614301279,226.79006865753158,228.06340546864686,228.42475531776918,235.48044573496165,238.149499336267,238.44600478280512,243.72901433024032,251.6592271284306,253.5722681550792,253.73983913395858,257.33984633079524,260.630520683664,261.35325427699,262.7685271553774,271.8701730211958,272.53249473307903,274.45512790383384,274.5481951690787,274.6312351664153,276.1480704355641,279.95081734770935,283.12305605722173,285.9271286748008,287.56032999548074,288.27991576393595,299.4163722648701,299.50927169970987,302.73056378635425,309.8453216697717,310.96191038346285,312.2954580292616,315.14010418221267,317.247151926921,319.7925724853137,322.58438880525614,328.37768379441883,330.5504249944696,330.5739908751495,334.08517490096636,334.3551732740313,334.4164609524229,335.971229140767,349.2676904487788,349.35915391983457,350.06829933335985,350.644847469472,357.2514016440325,362.5629278373257,364.97812359430935,370.689315914562,371.28950381922226,373.941733305093,376.6060954705842,379.48602659513045,379.9719555024645,382.9848259412041,383.844632873699,384.4495650138866,386.5592776279082,386.7838322500002,387.4623629978714,390.25286448517267,392.5263150814395,394.00940659807554,396.94882084693705,400.09147341305885,402.77211387770313,405.3666232146234,407.7700395284617,415.3726255588824,418.2168115255325,428.0534635585075,429.82840009690096,430.96955116790633,431.4489785356141,434.0378915873634,437.20003135812277,438.97767908587514,439.3073965783136,442.73191651459905,443.4471318879266,444.083757400097,450.9349929566268,453.4268045326942,453.81068730835096,455.1416932056395,459.7921360652069,460.26815611753983,465.4818970495725,469.10440624024716,469.17835358160653,0.0,7.931243083177125,14.31306698442239,23.668819636717323,24.40655488418912,27.187906484495553,33.13211135730249,34.09962203607136,36.39909503743596,36.60168910152102,38.21138385821354,41.420081513823476,42.249016442833536,44.90766820537113,48.7461684360895,49.30598726322246,49.46633667710734,51.65319902572562,52.85088206934018,55.17643508510802,57.71911276732277,57.8159436225763,58.8065774236748,58.83990656045194,64.97680834130973,72.62913218238683,73.28608294614862,87.89771656757415,89.13772342110528,93.86106333340675,94.99562541198128,95.22282426840341,99.51793172867374,100.08769108471898,100.54022317077727,101.24491793627759,106.16540777178913,107.00489452583489,107.02160191092172,107.23224754783438,112.17282822836424,114.82030941539327,123.99722334358084,127.00749616757618,127.68049214236271,128.2721544171417,130.3030763541187,131.26797469188745,135.42873144550197,136.582778876967,154.24950360315088,155.09158090315006,155.58143469803602,158.581146525101,160.14014225784376,165.31090771412082,165.95368565870314,170.09481565827508,171.41421818789485,173.5251097436309,173.98962355601228,176.26477167377493,181.11587467874824,185.24741651768693,188.53676665230753,189.60064948474752,198.45934143743253,198.80647647425883,201.0889744812074,201.76490750112055,215.7684429891443,224.57364076240492,224.63457901078942,228.2483135473881,229.90989657205006,233.32474922769893,234.53538794044573,238.59297165709563,245.21800605395495,258.21748764405794,258.23340140455576,265.5344994207964,266.9273775226013,267.2816466004108,269.5089068679657,269.85749354583965,271.62065210854115,273.9305345945672,276.95193021830585,279.91738606213084,280.52738134766383,289.102827446905,289.5533979636655,290.58506249751343,293.1168484897001,295.54193600463776,297.0165314844859,297.4460428133131,305.74984041791436,307.5526437913778,311.8465227084366,311.93386139612784,313.31754821832993,314.7481456742228,321.01457231441975,322.4022671436231,326.70070756146595,329.03204321163315,333.29593852317004,338.91387369493026,343.8570200430137,345.667490221947,349.25309047584545,350.42998327143715,353.35478238962213,355.2932137720254,358.74486684645564,361.2520368264446,364.5432800629773,368.4510230336154,368.72612548009755,369.9658362248494,379.44695190525897,381.9214828727696,381.973483993703,385.51541103288815,385.89920119226,387.7056582064509,387.92017735244355,392.7280032114232,396.73048597546233,399.08535060926613,403.08129988447456,406.0770213507708,410.9992354870102,411.44389324090696,412.9569331319848,413.13520414277673,425.9064881079137,433.0849416904689,433.49712930447646,435.163101903023,438.23577964026316,440.54116524096554,440.8210703214699,441.50095502973727,444.79148475673503,445.44114755708443,447.87100003273923,448.277002231583,449.1109441200185,451.33518300126286,454.12327885722505,454.87383320060303,454.8894375620745,459.5433416383115,462.4318343094579,465.8360500328396,466.4932224699547,470.1547269552245,471.92164153704135,473.90973987450354,477.23827219690486,0.0,3.1318482929296843,6.633801573295633,7.847499501139269,9.721826761591586,12.653872978708328,16.18695826282044,16.77172126974057,16.836849178269873,17.487604337306102,19.21916752669778,24.479307261506364,34.821660024905285,36.90564077255642,37.01559903099939,40.611835781544336,48.0932319160808,49.10475646259541,52.135684566525235,57.14632673189625,57.948183974561324,60.4369876368116,60.90685113819185,61.33621136277844,62.90145591173366,66.03018811360634,73.4962280723721,74.8479493031145,75.16726087864694,84.42085700534224,84.64500334969873,93.91176596602058,96.41721341527534,100.64634201473376,101.487586668005,103.55127508311773,107.33661524599125,108.42082446134285,110.63748730126825,117.67904295654667,124.73842243140213,127.40988448620521,130.10425987446678,135.56095877159444,138.35848653476532,138.73057146307417,139.03322425885594,139.96266388829795,141.87298206726274,145.27473051110127,148.5037926025029,152.79318782198004,156.2776724265245,156.8885514708042,158.99277428137935,162.86781606497718,166.42252735564358,167.86425831377542,167.9706198166257,168.78154741392146,169.65714228618884,180.67170903616724,181.22489461131426,185.67897072567442,185.6938936960298,189.94144365028575,195.93532148982814,205.373976925647,207.8041585506691,214.22241694060708,214.85948390866284,215.97618830947502,216.96779150759247,217.05127145392532,217.58678177046625,224.37834559647743,227.9698275552155,229.8697294852548,235.93079248011665,236.98729610310508,237.3938807628414,238.2555787851566,238.89805936791362,240.5552005857291,240.63551590942052,242.61841082149334,243.83045941360595,251.79668170498078,255.92146697558786,257.2724014981157,258.83581756677273,259.0715436110875,262.46230806834313,268.14168488314715,268.4631488895941,269.5203589121795,269.9118704323344,270.70879301895985,271.3229100180707,271.40829336961843,274.4890094286308,274.99193978334324,275.16149990365,277.01931925312516,277.2581483275009,277.86812704383135,281.85602347231935,290.3548096648118,293.5719190961195,294.8874738604252,295.9157116757309,296.0737197906914,301.92884154705683,304.0804125008709,305.26979893425,305.7688892735821,306.26085941817274,309.4918615710343,312.97855362977884,315.246081990162,325.7868090179482,328.16967840579275,328.65533889045383,329.41761396334516,333.1803255639776,333.2660031148858,339.93293439578474,342.23244419141867,343.34267792413453,343.70220844425756,345.00930935764796,357.20357339632125,361.346070571083,362.1309364477494,365.1074833046698,366.06210990513546,370.4933860156617,374.38609092358115,381.4001077970403,387.13767137560524,387.83743112062444,390.50431610568717,391.50103061368964,391.7458030131321,395.1326954185287,396.54036254748337,397.1292164018359,399.4680640811326,399.6444730912644,410.4766574783434,415.86937208056594,421.9050468957754,422.4675268555974,423.80989300042194,425.01019676395816,425.44904950269716,426.0760545040003,426.7244616236921,429.0701067644169,432.33468168887725,436.0798975011191,436.22630999677887,436.47616335852723,437.21237015460616,439.7086819095779,441.92075939348473,443.34559800758564,443.63964348307616,445.2835962267032,454.44172717600395,457.8936858880033,458.6897325616877,459.8821923665464,470.0092683959207,474.0618700180551,475.44445831243587,478.51582673617366,479.1940391648286,0.0,3.6241604312931694,4.077252325437884,6.991420878303217,8.453539595192616,13.821295059885456,14.37723900996572,14.464573946529079,16.142349841092894,16.34345459312105,17.337841367969702,17.361264361786272,26.543098474582333,31.66509099332208,38.60291113309546,47.012443828933364,54.58985493663861,59.93786354902679,60.32878243269924,60.883575587799896,61.31588797120113,67.3353228724351,70.2578942189334,71.55895403566575,76.02145373427388,76.91867142939434,80.18411580666583,83.59740758068612,89.33874332859504,95.24343230409879,96.21417585362065,104.31274306843477,105.95016563899809,107.47473423038038,118.44183190099373,121.81348358679175,126.6869003964033,131.76313182128067,134.1454915130445,135.31543895830785,138.76331488480704,139.8436901167048,141.64494169852296,144.7020251947031,155.34962181271518,157.5069156138816,168.06575782368756,168.42244881364326,170.53471406990695,171.13096278648376,172.30219443489423,180.34829612008605,182.40873369397545,186.26138979801993,191.08224522058725,192.4064978436259,197.9576425021783,198.22801664644422,198.32804567050223,202.84512954822276,205.97980831915976,208.2298766774172,210.14979452584484,211.58283793987871,213.94745526987913,215.77644890020287,216.37002501517534,220.60949149302866,225.95174439632868,226.48156559811326,227.5437986125991,231.25127007845813,232.4563131821835,232.68609965320846,234.22313423362564,235.4087052739821,237.03327617124697,242.7437915105219,243.49339522113655,243.5711090816556,245.1971848287965,246.92133193562378,248.1899716932508,248.39088823977082,252.97034564891092,258.7175412665344,261.2912474952042,265.3966898264619,269.4451886123272,276.44567913109574,278.4093802651887,282.4437736805783,287.1067480014691,290.87232113985505,290.90051440764057,296.71510295358854,298.94658518908403,300.3925559338655,303.55241337448115,306.49605964080314,312.76226483885097,312.93380420641324,313.2720152860556,316.7222286687163,318.6619254612211,322.4077334775254,325.02054208103635,325.6092647958764,326.17466570095155,326.824157727153,330.3757258547409,333.27000184387106,338.1815382497865,339.55444294299735,340.59166735424725,342.66118446960513,353.9627886547957,354.79701673268045,355.49659739842735,360.27797774975954,361.7061773032988,362.40360490290203,365.0169452685788,367.0575561188804,370.8158198723581,371.68535420375355,372.1956319002471,373.79421177209207,374.5617935453055,376.03774541987264,379.46125590497485,380.05280582310695,380.17740849622567,382.6182335809526,383.0414611822447,383.957374305097,384.7995784725481,388.75503114830093,391.80014779328053,392.2846075347635,392.8755219575312,395.4755698699385,398.2731825057351,398.8223293493258,401.15679462216116,401.3922589935974,402.97856060714025,405.5302840832759,406.83168014696145,415.1450431308515,418.73396954147313,420.1107083557422,421.6125993990345,426.2444479357262,432.1534525358773,434.7860368445358,436.69308903055435,446.0218336726115,448.01671401003495,449.36905094666423,450.7092228366097,453.4001862099609,458.6388622355051,459.67406906584074,460.50168291484954,461.39186754290967,462.7108965213289,466.7570833644217,468.27320244764326,475.5983585120945,478.1646651387738,479.2724787772782,0.0,1.1320078286886792,3.1941752372091474,6.12128008210677,9.488673687553907,9.636557530101818,10.635804463667931,11.65886659628115,12.719363911363804,17.65339994769688,17.788956126530415,24.760751162752303,30.599841635984824,36.89030126847597,39.58851944660512,41.79086838904602,42.453917636799346,43.440964273300835,43.666332122895646,45.72230561852189,47.791626327413,53.83828400179044,62.36308038671525,64.41914537099856,64.65057584985448,73.92622726829558,73.94454654865473,74.46356439304283,76.7280310501306,77.98308200751887,81.85447190696742,82.15130147892953,85.15221341220291,88.21359648789674,97.7409343654497,99.7472880698993,100.50066883775457,110.39938869812012,111.12209234584857,111.51744769226008,111.98818485348282,120.25060884857163,121.86610823695217,122.85327976847199,123.6537621000674,127.93499700470879,129.34586982751554,129.39426082460147,129.48935879528577,131.01612930535418,135.31633396998714,139.01468239258435,140.27535906891043,140.37168752767434,142.05552722203223,142.5469858123422,142.79166888965892,144.81223864537324,146.52430888906537,147.053163933851,151.22709461329563,156.73553254503722,157.1093692015268,161.7273542286199,162.39927351484533,165.50346885302605,165.7152942493165,165.79637302672543,166.1807376556825,171.5074905716512,171.64039549190872,173.01381713746667,174.6423105391518,181.69474948579403,182.97271411401624,183.34202782805292,187.66539385441757,188.2320583969807,193.80470032741434,195.30496974152655,206.4940976449061,212.5236095000094,219.22065732354093,236.4975259401164,237.71917000522805,243.97877997637246,244.29175377082814,246.1964921288073,246.7700511091603,248.078514595079,249.36143078369267,253.15301883007382,254.30559160541878,259.70830608243665,260.81021989237473,264.02103537219034,267.9654138506054,269.3741947020081,275.01052205553384,276.23100024405414,276.25250336536664,278.3448261953782,287.1309309345589,288.94295787406986,290.12213198563296,292.44070286808255,297.6697296161138,306.16249448232156,309.5804856112126,311.6655714354566,319.1278690723814,321.8777055572639,328.28336548770716,331.59147231114866,332.8592616583431,338.1852097882314,338.32499355399915,339.75748251606615,342.3613897561538,348.52633278433666,353.1002988375954,355.1825685799154,356.85152330347773,357.1387197533202,357.2124780166732,358.1307834515474,358.51998810011634,359.24776617893957,366.31203554629917,368.67364260612663,369.9507577643319,376.97550562045507,380.2528511275852,384.1250768209318,385.98142569391376,387.72777205025386,388.73355159058275,391.75976102373147,393.4035932351752,395.9015440509397,397.3373250985288,397.4585188808311,398.67847575475156,400.5756303106047,402.01698829244486,402.1347410531676,402.546534834916,408.5584526244464,417.1892244989854,418.1555942312026,420.04399790227916,420.19338707566345,420.2506713847747,422.52891487453115,434.97862365776245,435.59096401395345,439.0561822212804,440.0580239036729,440.3296951732813,443.76003578604605,445.3029084848497,446.25208061160146,450.7464860791406,452.3533735890322,453.2176040959953,453.530423504519,455.81364042446233,456.13383996132217,463.3570198216798,464.28730370327816,465.90379079042873,467.9674927542787,468.13246514590554,476.25424992253426,477.80345067683544,0.0,2.3900080523390894,4.267010012264569,4.436201037179368,4.697591441745075,8.726997451402887,8.837081832817402,15.416092121008804,16.555136211714505,18.007074994801368,23.33101089778401,23.964751388135056,27.374204421836613,31.015746774193087,36.789815072356234,39.30137337639456,40.856936018854775,53.77109927719793,76.41873072660016,76.70853540593042,78.93264866114195,79.04150277011821,86.21477919725025,87.30811335546966,88.94799617138028,90.49588759581259,96.6770323877699,97.33565605321054,100.75331653659558,101.71727287468579,102.03825259461128,102.16650510519624,106.19747631415416,109.77644547791654,120.56955133101492,123.62111736437444,124.34748806500026,131.60744109748936,131.9353499443469,133.12708810506783,133.72522471411793,137.2254195761216,144.30380433799309,150.64507198684603,151.6367902853767,154.15057043686986,157.3645476285621,158.12333895556273,160.7475622670279,160.7642578358744,162.8875536407577,163.17401216157288,166.98443904150182,169.49988597282538,171.87675130774306,173.68754716676477,174.08878072292063,176.44019228941508,179.12918129689726,179.5921820351858,181.28073591024054,181.61823202790796,181.69781279552083,184.4403575398214,189.63834380686617,192.22198695476146,192.4424821782232,193.5720848512389,199.41374236982347,201.1772054031003,204.4652385734874,204.587952674301,204.64363540643683,204.83830409729194,205.32019696787296,206.88162179169407,211.48415457508682,213.50190535210533,217.28769571537455,217.3116661336111,227.1432088325765,227.44925383717435,228.92176176986203,234.01650289892208,237.25090384514704,238.1352943483301,239.9051194737803,241.83123625144572,241.84600537293315,244.1496361044826,252.47066833417438,253.06331334722086,255.58880762031055,256.7561444714398,256.95294230425066,260.1954230998572,265.39683933067596,265.746701765092,267.8228960385443,268.2657311694014,271.69316729634096,274.07941903684673,278.7250321173053,278.92246352922524,281.50865577981415,283.9151217864573,287.2183502378527,290.1825088565691,293.5741014835812,294.4519114933133,298.4732613997276,301.3242338773211,301.7818868907395,305.5874292058118,306.2609449292223,307.861314421006,308.85934597187065,322.22787676846605,323.22204032855785,323.25992689847857,327.21722394755983,330.0616149808475,333.15632312352096,335.31253424587857,335.98033038785195,343.5191645639997,345.70664426674193,349.20535141810444,350.87590270949937,356.8627049472471,357.1769392749313,358.7375193299626,359.6859449104849,362.6266425379581,367.058017795357,367.53464731441295,371.3388620939881,375.4042923300492,376.95007227130736,376.97310451943497,392.00729251807485,397.0414478221076,405.62318149535434,407.19628529652823,408.7168553636302,412.8614330155067,413.9205574762233,418.82659148457134,420.0099434019155,422.62439032038117,431.38383975029757,431.61735421019745,442.62954868545427,443.1713341441705,445.0789018971698,445.74581607801116,446.43025809321057,446.4375147881745,450.0372417012667,453.10144100158914,453.7531270144061,453.84777826943997,454.5314182021882,455.79056613963087,461.64395563301844,462.6096375965554,468.872851351688,473.72495309174576,473.9052634236772,0.0,1.4528815280015763,5.015750062157908,6.523504751516813,6.633627544069406,8.59916862122483,8.718928173929182,12.145416975239737,13.24011533958702,13.457437552264224,16.115352134103084,16.835609299667883,21.69453699724712,23.12368254760085,25.358432197220264,29.469379242016856,29.527162131145147,29.5642140803401,31.02298816828303,34.7751641125112,35.16450624200184,35.28336594146955,44.47861170687262,45.014006791201034,48.175175675012994,48.24254545460886,51.3532019995081,52.600965528483144,61.299655740670225,66.88560400244383,75.87283176893601,77.20502020655908,82.29566621584668,82.44558232932762,84.29510328759181,84.39650453803566,85.93441307368794,86.45971147237377,87.35433085970566,87.80304418674781,89.2631352084762,98.67616863663785,99.07697851952776,99.70135762941028,107.74272426222682,109.30291978200599,118.11061375159709,122.01270420615727,127.35371758654253,127.80648620029417,130.15039080328327,132.76375272883925,133.1968786688639,140.2423103937167,145.1448569248293,147.28940535072147,151.9622450612105,152.02676497788846,160.31410569708765,163.9139668848788,165.24829112700547,167.35849604979555,168.1440350326504,173.72815735246132,173.84000143662394,175.90346229928213,177.6202544925666,181.03804174319123,182.15023273894096,189.75706476421203,195.4048999673614,197.0932220280778,197.7185551296269,201.59028344322098,213.43238306294023,219.8479547163294,221.47072134970458,222.56493526651968,224.21692725988768,227.92201975453833,229.01799408003154,230.80068723805795,232.3414012741728,237.65158787340604,239.2217517107822,244.1328295585433,251.33852744470522,253.0770523330212,253.8228282134638,254.14888881233475,255.95790754709708,258.2218383576562,258.9969659176714,263.0124296054646,266.40079436410804,267.537405097735,270.53710103444234,271.0670675024666,272.4085356514332,276.45224401473547,278.16362740554274,278.97747549610057,287.52911325226785,290.71411720016124,297.02145434326667,297.1527904236272,297.9480418324559,301.6688319044441,303.03257687210004,307.14662482487023,307.9650086726534,309.55480305364523,315.1913290729788,320.18381019315007,320.7504283327894,323.8160974549111,326.80735685279046,328.4894625585894,333.3807771698549,335.5407698475787,337.0987252854845,337.50766626268927,340.48970061534806,343.79502098481544,343.9017953715142,349.49227192864123,354.0728459087921,357.0476127252448,358.1993873718594,360.9966739378323,362.05874216358035,363.7663317006418,364.51359228008437,368.9331768320606,371.25558913996787,382.362114079696,384.35284453602856,387.06664295116514,387.2991890185123,389.44452285628023,390.7423515046657,392.16081382291884,393.27643747096187,397.7342879491528,397.9047510438975,401.7865139666763,401.8310353281321,411.32466049834863,416.68851720422737,417.8918971594049,424.395291279848,429.53544455383445,430.55778908627514,430.8119552527147,432.4757374116922,432.77811952625507,437.35780509410375,444.8276487740694,447.0708490962118,447.49503440567764,447.9033651134205,451.02473202362796,454.9850459410931,456.33472497149904,457.9635815778953,460.14847560972623,460.48699085266514,462.6969964228046,472.2278880647921,472.3395155893665,473.0803047559208,473.5860022126409,476.9128729841333,476.9180489363712,478.6125409260956,0.0,1.2022794582056595,7.739515647251606,10.508707988027634,10.621013829666197,15.600573977550148,16.57530727106863,17.17291128790116,17.327523115438915,17.895679482031213,24.00682734450523,25.080554260171887,27.155593477804956,27.292170663591396,36.58229266050039,38.594174209313756,41.02900986974756,43.647982681056014,44.37517346831734,44.66985678646928,46.326652442868586,50.95954047627375,55.163572476010906,55.222037841575144,58.84321935648217,59.425817891105105,60.39213206243412,62.93576792744491,69.93540153254953,71.87082683256301,72.0018562947285,75.24720892835926,76.43845010977036,84.5437754423474,89.4825428560432,92.7114948635769,97.34822690261839,100.90537824944764,101.37830510346893,109.36440879712615,109.86219074989447,112.39564072739843,121.11439654356,121.83525372450012,122.23950576964064,122.60182957863411,123.89005878156883,125.93762038230551,126.4341123924071,126.73881959497422,129.10663625177835,138.94625117973524,146.9947275943712,147.35374740140395,147.83402727368127,156.17502509741584,160.40738294043516,161.69688794773643,163.2025105090562,165.7493122964147,166.1231461565862,175.00174279662207,175.5240912362359,181.1206704186654,194.4557179639256,194.7578600703135,194.79580932432813,200.8347080150315,202.39402323132705,205.2366067290022,208.01620360671603,216.26263101306805,220.8215569126371,221.1111732595869,222.71373952362458,223.53141325122286,223.94926042972617,229.09837873152736,230.05356726593155,235.50342053145695,236.63221551640618,237.93294368348305,240.92186601990727,242.99341156190494,245.85831744191822,248.45013335691095,249.4052744528853,262.26646190961077,263.1958856765249,264.2816853293905,264.98113670225536,265.9610737523594,274.59492843796903,274.72142931464356,275.88749586220564,279.2425452617765,282.5044066368576,284.4855070597512,294.8749999842834,301.26987422525013,305.24594894693183,308.598323989998,310.3210232274543,317.3715897695284,318.02391099254976,319.4478882413739,319.7216211573088,321.1174179988174,327.90498870324717,328.4119130539431,328.4364002891672,330.87614608204495,331.7927718696177,332.4500219553271,336.7640051418499,338.7164560561897,344.01157623931755,347.28256366846233,348.9403873723765,350.17347443964866,352.27279673945515,354.6048957218043,355.74745054334977,360.18785537115764,366.73036598741794,372.68810843938,377.27915313359887,377.8320294783757,383.527937141732,386.818553229245,390.0254378989687,395.00826562470075,398.6723621761167,399.08094900077543,399.46980425563333,400.598418201855,401.22681711783616,401.4904389676793,401.73135866141524,402.76250344573504,408.851235208617,419.0945697164852,425.72572022791354,430.6205404251154,430.79585826353645,431.3731410514322,441.00664133723046,445.50709657123764,448.9555539816527,450.14309539742885,451.8267337560338,454.4460324714768,458.9768189135484,460.7715277436692,462.6390842777697,468.30401247908543,478.70801406837813,478.96004280399643,479.2288424706551,0.0,3.7871226031009155,10.21231277714869,14.08569409955139,17.004362889550737,18.81472581252746,27.04965104655903,30.315098529418925,33.131437223541425,33.77753853578398,35.48806980840909,36.07004531467517,36.83730517974073,38.208554427087634,38.91246710521985,39.49254167173712,48.94478991394422,51.467772559129976,53.21199885521845,55.34573170430523,58.70540741407351,59.52240756110275,61.27059594381607,63.76887746297565,66.69930499922091,69.87231021935749,73.50452308157578,73.57543379437126,76.01750182096559,79.63444419028431,81.46346271480105,82.33783931474368,84.2607062751535,84.51401591449168,86.4992261283139,88.02174368075461,89.73317399722947,90.66384404788805,90.78136662030107,91.13852514448082,91.70827944993339,92.3474037114209,92.46563980426015,93.14266279243034,95.98306224465586,97.27458908241206,99.76202840673989,106.26913641856393,108.53180505473289,114.4333648969298,121.26723511026024,123.85576923952361,127.00448064469256,127.07068961221597,127.21419392936053,134.4451481462036,136.6642651006391,138.2896876226948,141.86201309450743,146.74134699272443,150.54749658311385,154.52530154575174,155.508319050984,156.30321762276722,157.2274994641721,157.7663987819773,164.93680853634828,166.17355520399514,170.72912187549608,172.09756925914868,173.56260208303644,176.74375333673507,177.15080069095612,180.62854387356444,182.08832273853432,183.80689933532543,187.00593542383442,191.25749233301283,204.13397215619818,204.79307146822194,204.87554686979934,205.0760136574092,206.3967683218811,206.96510124598652,217.2054719307531,223.53578253467538,224.6875271653386,230.80850819848663,231.47192497708406,231.69416986941368,235.07797097782822,236.55893940675557,242.2914786145189,245.24104959267729,245.76468592274978,256.7416443219235,258.14472136999854,261.1413239188626,266.90704079370107,267.54675541932755,273.8152367464778,274.0971273374961,283.10945825605194,283.45688946424576,291.9819976522997,296.74988551640314,300.3828536212632,306.7968365613397,307.4577090378508,308.2984481717863,309.0914696311379,309.33184516631354,310.4304363606459,310.523860026369,310.73556082168164,323.1257869411272,325.38514324374626,328.2157974636689,331.3778579197145,334.0032028757694,335.6502899268986,342.31022703379153,345.5249452813271,346.60847739175915,347.52927464737996,347.56707308623345,350.21155460481356,354.1847851838582,354.7246681534382,356.6532665240864,358.25460462481146,358.4901159886843,360.4085003818767,365.4664423145576,366.4901963080304,369.9349039348823,376.1321925956488,376.5114021523981,376.74367985911175,383.0181249261951,383.5410668111631,388.40941025766875,392.4392523560451,395.7105300139806,397.62396352351857,399.3065865782271,399.56219493715275,401.72660909589115,405.7786164623232,406.77273848260114,415.00136121584893,438.62116748963354,439.52513870094856,440.2746514453638,444.64675009369506,447.29350484951476,462.4978488457293,465.6590811628223,471.4963901114371,478.0088904909367,478.5184420650766],"x0":" ","xaxis":"x","y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],"y0":" ","yaxis":"y","type":"box","jitter":1.0},{"alignmentgroup":"True","boxpoints":"all","fillcolor":"rgba(255,255,255,0)","hoveron":"points","hovertemplate":"What=Callers\u003cbr\u003eArrival Time (Simulation Minute)=%{x}\u003cbr\u003eRun=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Callers","line":{"color":"rgba(255,255,255,0)"},"marker":{"color":"#FFB81C"},"name":"Callers","offsetgroup":"Callers","orientation":"v","pointpos":0,"showlegend":true,"x":[0.0,12.92132627624395,15.43588544608901,16.93853668934502,21.0419141231562,23.881186773132082,28.087730681524747,30.570073314673834,37.08509678038398,39.69267929615888,39.95888673316267,58.44445212136843,62.66936892433127,64.2151133614276,69.78192351456305,72.1243789762373,81.80431927678511,83.03512257795906,88.41916681485613,96.92075392736858,106.30605198268363,115.2997538204627,118.18088361553808,130.8027973098255,141.1315309667164,145.1031031372763,146.01771041535798,149.85127273276976,159.54690069401857,175.54255455590342,176.14408846744863,190.8746960419741,191.74619400005525,199.4915535728942,199.65778717399,205.3303217624068,206.86092132380188,209.06042112811218,241.4528973332124,248.00342164152482,248.61441372420177,254.1955723679588,275.5655086487832,276.1860552279076,281.39334746934423,288.0193528882285,288.8809129861004,291.38426992794615,295.2959998055858,305.48414426151487,306.81126677283316,323.9416714093468,339.0413405088555,351.9759716003173,375.1835589551307,381.1863397662625,385.1140284299748,392.4453089252326,414.66615133247944,449.0621965143071,450.2591034286473,460.8534588937138,464.2251041208553,468.1432624227749,478.0155279216787,479.45700630913814,0.0,2.595923995051556,17.242142511540166,23.07064461025051,41.76361117606087,52.32444746166297,62.945715867375085,94.47188369616438,102.22158438599128,134.76634649990905,136.2288104189547,143.70325041483338,144.65560439853158,149.60988145245506,187.25357257237076,189.30809311577315,199.4068643045636,199.95064316396977,206.8147118111915,216.8320760683446,220.32304835044158,221.37600506537856,227.96189388067896,229.15663810725562,240.51998159270647,255.97554686096134,274.1322136994191,305.55612719875404,306.1302815530235,307.3868492163579,308.2483985092327,348.6006427566651,358.44693631483597,370.61307380798195,375.4142117869721,387.785144700212,388.6724441549962,397.5719606729033,399.1874132064362,419.2033632604902,427.2187879045721,430.1163708531762,431.4233889730572,453.75230890423165,466.4142321366797,472.21639229431645,0.0,10.55755264051615,11.333228378661202,26.16787991489713,30.087383689751917,33.743899345247485,45.3981191138382,72.52527668998698,76.75298919707868,80.78707275482316,109.0230201076723,121.74535201361113,152.25930938819369,155.47625018602355,157.29577717574247,158.40151777435761,159.37966043230935,188.12625599796277,189.6661645360003,189.83725994778757,194.4390955310041,195.89653276687142,199.4486693392153,202.674225875252,221.9812493680155,225.2350795858961,238.47726856790976,250.0289133125633,261.6480091051731,267.918636956323,324.0924944039891,333.25361706026194,344.2805852628205,364.8400674515001,368.3021586680628,373.3657990102837,377.7320269602961,387.8506949884589,392.18423780546,406.17686780475833,412.37254920954143,412.98106739289005,420.31514957420933,427.0220673258957,450.4513349758096,452.7816563065764,456.64853533318404,478.4502313699712,0.0,1.680356678492308,32.31946707335155,35.31567514634299,44.6010320205349,68.04624249465007,92.46706800507066,92.60748783409475,108.05417118638552,110.54941394094499,159.27495248439362,165.14896421663667,166.57770488685824,169.94321008403745,173.04363305542162,190.67214008541833,224.93900352091333,238.00831572857908,255.0414692039442,293.1319447595892,295.06530951859736,310.7454001476098,319.0572314959864,353.88512118749503,386.1298389107506,389.18894326309425,428.79712903252755,431.30853813337706,431.3456340684615,458.01890859733743,467.78062400727435,468.94529105386425,469.71673839725645,478.3425019139766,0.0,4.047770940473429,4.3305664067199645,14.861581550097767,23.27628791193186,24.566306126615174,25.861634239709733,31.478237131620702,34.13595604616573,44.20434450190045,44.917213571735466,51.737654702550806,103.56013991130507,111.9680389565741,114.92205180128632,117.19796151113398,120.50995440342605,132.02605030278644,132.71692437252102,133.08457091289827,136.533061234046,160.0812948118189,170.17556375414492,170.21010299911129,187.2329751794438,195.83857496826442,233.77342774956008,245.48847670399343,262.396262276838,268.855169682259,271.96568974863135,293.0483062982766,293.6947418278673,306.51896356202013,308.39023170626564,315.2269222781972,325.4798481687881,327.81813619535467,342.990308938265,344.5492771129253,370.51859343001223,376.53372918309555,389.5323913677747,430.3205935564485,440.63573157176796,458.7755649561757,464.08973606253295,467.8598069440217,470.7560126297846,472.67702179897736,0.0,3.3267377387280086,10.027689884799436,15.783908047440104,21.776637400033938,64.63371666413936,69.74802395690378,72.3724575619151,73.0763103030968,79.92331924734624,83.47146902716565,134.10103621085173,135.60853888272908,139.55854040722033,149.1066304890228,160.41325993670642,164.9342327027942,167.72604369344302,181.727576101609,192.93086379588004,204.69056551237247,216.8679421951101,230.85805621711305,240.35645688940673,293.2176816396725,296.38367451961767,309.20270900088303,309.58142949864776,316.05691379745383,325.43116810829036,348.7631436503009,352.6707933758328,358.86939770538197,379.40739770558906,381.09621571342376,384.29770239994633,408.7009589275066,411.90579567218333,426.53991616949287,433.74423208741143,438.20819102079884,450.3510834237684,456.12886519093854,456.6014171202782,460.58087858156347,461.4670917061945,461.87230212303234,473.5776041939475,476.23233031454504,0.0,1.1741076549477523,4.534566735339265,18.312625665821276,23.875968546409176,23.935013256692844,29.6809989237063,38.052983179443245,43.03774245238394,72.61674323437363,78.97002123391128,91.16779102613526,95.50011805156767,101.12001916543446,102.09037586273926,109.73094850497348,126.5971894992967,145.48652808649004,182.99643152837686,189.15779271344317,189.78246297394037,196.36526330531996,208.23491755824332,217.09965937071055,228.28213217775382,251.40167138406582,266.57275055962975,272.13395593599876,289.61042210496544,296.8401242212614,308.4033186917507,311.5556056529777,332.4445227777437,334.20889000098913,349.20818393514026,351.7709986763679,365.01821925596636,373.0840443733979,392.0264318338701,396.5491426839817,396.83132344940464,403.6586139370255,411.71395538107936,417.9837664614639,439.8521610285615,447.0806314167804,452.0213760546485,461.60911650017084,469.2164278821742,0.0,1.0667509830523014,5.964020711012525,8.737781933158095,27.48149234631496,66.50845378132541,70.30662671661283,74.42315438065175,92.5000909745172,104.6060287093876,108.48595301486323,112.89053118318898,117.41565154407964,132.60957842394942,133.86961071136395,134.39496359268216,136.14672662486046,136.47759155496342,147.51753616756653,162.13223875940614,171.93338213891633,172.01432013038428,180.24568365417161,182.23347488272012,182.76735031451952,191.654181536752,194.0745345226067,196.18526679897766,210.80986959713078,218.44865592574865,218.70882265404646,222.59725174484547,229.0174854985175,232.8557261513249,235.16027866153868,241.21571922297653,249.7227371752468,255.85490085032373,264.1836661466047,277.4210573672926,277.5633216190511,281.71528210898254,284.89560254169606,284.9377193180025,285.17494628930143,301.7120616184347,312.4035901236485,339.5998210365424,343.5848294534048,344.4302446671255,344.92661273044206,350.8931575849643,365.8505682837632,376.4968709018532,380.0373715814369,393.7555018809941,407.89047168223163,409.308628787892,436.1965974239286,446.35256951029214,447.25173512888045,460.3181185445542,0.0,1.4541985189508735,17.733758160785648,46.68014478744189,64.72211805820459,70.60707425727013,70.60996958133727,70.84430770520368,73.6191610467821,92.2828579271795,97.19338578575253,113.36461836075568,118.57708724680347,122.79842176407799,132.52505020488778,133.12024317679516,145.07228473285986,152.13891816515417,161.49274414648346,185.4863748957022,188.53254085142274,208.933939390789,224.70508603085028,258.74007988277765,259.4970988512599,268.58498223610235,269.14025557506983,282.9205949235645,283.93603477377997,288.4030508084406,302.37543698124506,323.92168914030657,324.1031171678854,329.30927780152945,335.12783096523486,336.57752964653423,340.94749555248,351.35415161286227,356.0040089045632,382.7423752104861,390.5321458150545,406.10766134002574,419.7392611235444,425.8983617477788,435.04419720414177,439.6479748709169,450.380440389753,460.88008905370526,461.84499847826066,463.95233871005314,467.86047289217385,0.0,1.0570258182201226,5.416741034084634,5.620814560685406,7.183394653003494,17.476873822652625,21.144529967045038,30.52809060152386,37.730083505107594,59.1129194911484,69.6889204986855,76.81582469636163,76.96635194174348,103.64098122745392,121.24191418489939,135.48663750900957,143.11018084796595,144.18767830945953,147.3041184094042,155.74309611828687,159.29919204362176,162.47378926672533,164.1146034212585,180.85051994589816,186.60142167298974,229.51743342239595,231.84340302257087,242.03467823672187,250.5309318722693,251.861099092157,261.3166269043696,293.12640219271304,324.6896543577929,329.3285097297194,330.03079202607086,338.3943893456731,342.49199167419243,347.4248352623671,354.6904124523086,371.3327740710522,373.9783568014603,377.7554447527288,388.79475901604883,388.93990584902326,415.6361199620773,418.58148991988577,425.8958424125482,435.8755267279781,445.66785892942937,460.0782979916051,460.20950428180896,463.26991505586653],"x0":" ","xaxis":"x","y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],"y0":" ","yaxis":"y","type":"box","jitter":1.0}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Arrival Time (Simulation Minute)"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Run"}},"legend":{"title":{"text":"What"},"tracegroupgap":0},"title":{"text":"Patient Arrivals by Time"},"boxmode":"group"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('5d96a624-485a-4a78-86a1-b96e9ab33596');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+<section id="strip-plot---call-answering-by-arrival-time" class="level2">
+<h2 class="anchored" data-anchor-id="strip-plot---call-answering-by-arrival-time">Strip Plot - Call Answering by Arrival Time</h2>
+<p>We can also use a similar point to give an indication of at what point our system starts to overload during each run. Instead of displaying both patients and callers, we use just the callers this time</p>
+<div id="f83763b4" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div>                            <div id="0345ac56-8a05-4063-8396-7bf13ed431a9" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("0345ac56-8a05-4063-8396-7bf13ed431a9")) {                    Plotly.newPlot(                        "0345ac56-8a05-4063-8396-7bf13ed431a9",                        [{"alignmentgroup":"True","boxpoints":"all","fillcolor":"rgba(255,255,255,0)","hoveron":"points","hovertemplate":"Call Answered=Call Answered\u003cbr\u003eCall Start Time (Simulation Minute)=%{x}\u003cbr\u003eRun=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Call Answered","line":{"color":"rgba(255,255,255,0)"},"marker":{"color":"#005EB8"},"name":"Call Answered","offsetgroup":"Call Answered","orientation":"v","pointpos":0,"showlegend":true,"x":[0.0,12.92132627624395,15.43588544608901,16.93853668934502,21.0419141231562,23.881186773132082,28.087730681524747,30.570073314673834,37.08509678038398,39.69267929615888,39.95888673316267,58.44445212136843,62.66936892433127,64.2151133614276,69.78192351456305,72.1243789762373,81.80431927678511,83.03512257795906,88.41916681485613,96.92075392736858,106.30605198268363,115.2997538204627,118.18088361553808,130.8027973098255,141.1315309667164,145.1031031372763,146.01771041535798,149.85127273276976,159.54690069401857,175.54255455590342,176.14408846744863,190.8746960419741,191.74619400005525,199.4915535728942,199.65778717399,205.3303217624068,206.86092132380188,209.06042112811218,241.4528973332124,248.00342164152482,248.61441372420177,254.1955723679588,275.5655086487832,276.1860552279076,281.39334746934423,288.0193528882285,288.8809129861004,291.38426992794615,295.2959998055858,0.0,2.595923995051556,17.242142511540166,23.07064461025051,41.76361117606087,52.32444746166297,62.945715867375085,94.47188369616438,102.22158438599128,134.76634649990905,136.2288104189547,143.70325041483338,144.65560439853158,149.60988145245506,187.25357257237076,189.30809311577315,199.4068643045636,199.95064316396977,206.8147118111915,216.8320760683446,220.32304835044158,221.37600506537856,227.96189388067896,229.15663810725562,240.51998159270647,255.97554686096134,274.1322136994191,305.55612719875404,306.1302815530235,307.3868492163579,308.2483985092327,348.6006427566651,0.0,10.55755264051615,11.333228378661202,26.16787991489713,30.087383689751917,33.743899345247485,45.3981191138382,72.52527668998698,76.75298919707868,80.78707275482316,109.0230201076723,121.74535201361113,152.25930938819369,155.47625018602355,157.29577717574247,158.40151777435761,159.37966043230935,188.12625599796277,189.6661645360003,189.83725994778757,194.4390955310041,195.89653276687142,199.4486693392153,202.674225875252,221.9812493680155,225.2350795858961,238.47726856790976,250.0289133125633,261.6480091051731,267.918636956323,324.0924944039891,333.25361706026194,344.2805852628205,364.8400674515001,368.3021586680628,373.3657990102837,377.7320269602961,387.8506949884589,392.18423780546,406.17686780475833,412.37254920954143,412.98106739289005,420.31514957420933,427.0220673258957,0.0,1.680356678492308,32.31946707335155,35.31567514634299,44.6010320205349,68.04624249465007,92.46706800507066,92.60748783409475,108.05417118638552,110.54941394094499,159.27495248439362,165.14896421663667,166.57770488685824,169.94321008403745,173.04363305542162,190.67214008541833,224.93900352091333,238.00831572857908,255.0414692039442,293.1319447595892,295.06530951859736,310.7454001476098,319.0572314959864,353.88512118749503,386.1298389107506,389.18894326309425,0.0,4.047770940473429,4.3305664067199645,14.861581550097767,23.27628791193186,24.566306126615174,25.861634239709733,31.478237131620702,34.13595604616573,44.20434450190045,44.917213571735466,51.737654702550806,103.56013991130507,111.9680389565741,114.92205180128632,117.19796151113398,120.50995440342605,132.02605030278644,132.71692437252102,133.08457091289827,136.533061234046,160.0812948118189,170.17556375414492,170.21010299911129,187.2329751794438,195.83857496826442,233.77342774956008,245.48847670399343,262.396262276838,268.855169682259,271.96568974863135,293.0483062982766,293.6947418278673,306.51896356202013,308.39023170626564,315.2269222781972,325.4798481687881,327.81813619535467,342.990308938265,344.5492771129253,370.51859343001223,376.53372918309555,0.0,3.3267377387280086,10.027689884799436,15.783908047440104,21.776637400033938,64.63371666413936,69.74802395690378,72.3724575619151,73.0763103030968,79.92331924734624,83.47146902716565,134.10103621085173,135.60853888272908,139.55854040722033,149.1066304890228,160.41325993670642,164.9342327027942,167.72604369344302,181.727576101609,192.93086379588004,204.69056551237247,216.8679421951101,230.85805621711305,240.35645688940673,293.2176816396725,296.38367451961767,309.20270900088303,309.58142949864776,316.05691379745383,325.43116810829036,348.7631436503009,352.6707933758328,0.0,1.1741076549477523,4.534566735339265,18.312625665821276,23.875968546409176,23.935013256692844,29.6809989237063,38.052983179443245,43.03774245238394,72.61674323437363,78.97002123391128,91.16779102613526,95.50011805156767,101.12001916543446,102.09037586273926,109.73094850497348,126.5971894992967,145.48652808649004,182.99643152837686,189.15779271344317,189.78246297394037,196.36526330531996,208.23491755824332,217.09965937071055,228.28213217775382,251.40167138406582,266.57275055962975,272.13395593599876,289.61042210496544,296.8401242212614,308.4033186917507,311.5556056529777,332.4445227777437,334.20889000098913,349.20818393514026,351.7709986763679,365.01821925596636,0.0,1.0667509830523014,5.964020711012525,8.737781933158095,27.48149234631496,66.50845378132541,70.30662671661283,74.42315438065175,92.5000909745172,104.6060287093876,108.48595301486323,112.89053118318898,117.41565154407964,132.60957842394942,133.86961071136395,134.39496359268216,136.14672662486046,136.47759155496342,147.51753616756653,162.13223875940614,171.93338213891633,172.01432013038428,180.24568365417161,182.23347488272012,182.76735031451952,191.654181536752,194.0745345226067,196.18526679897766,210.80986959713078,218.44865592574865,218.70882265404646,222.59725174484547,229.0174854985175,232.8557261513249,235.16027866153868,241.21571922297653,249.7227371752468,255.85490085032373,264.1836661466047,277.4210573672926,277.5633216190511,281.71528210898254,284.89560254169606,284.9377193180025,285.17494628930143,301.7120616184347,312.4035901236485,339.5998210365424,343.5848294534048,344.4302446671255,344.92661273044206,350.8931575849643,365.8505682837632,376.4968709018532,380.0373715814369,0.0,1.4541985189508735,17.733758160785648,46.68014478744189,64.72211805820459,70.60707425727013,70.60996958133727,70.84430770520368,73.6191610467821,92.2828579271795,97.19338578575253,113.36461836075568,118.57708724680347,122.79842176407799,132.52505020488778,133.12024317679516,145.07228473285986,152.13891816515417,161.49274414648346,185.4863748957022,188.53254085142274,208.933939390789,224.70508603085028,258.74007988277765,259.4970988512599,268.58498223610235,269.14025557506983,282.9205949235645,283.93603477377997,288.4030508084406,302.37543698124506,323.92168914030657,324.1031171678854,329.30927780152945,335.12783096523486,336.57752964653423,340.94749555248,351.35415161286227,0.0,1.0570258182201226,5.416741034084634,5.620814560685406,7.183394653003494,17.476873822652625,21.144529967045038,30.52809060152386,37.730083505107594,59.1129194911484,69.6889204986855,76.81582469636163,76.96635194174348,103.64098122745392,121.24191418489939,135.48663750900957,143.11018084796595,144.18767830945953,147.3041184094042,155.74309611828687,159.29919204362176,162.47378926672533,164.1146034212585,180.85051994589816,186.60142167298974,229.51743342239595,231.84340302257087,242.03467823672187,250.5309318722693,251.861099092157,261.3166269043696,293.12640219271304,324.6896543577929,329.3285097297194,330.03079202607086,338.3943893456731,342.49199167419243],"x0":" ","xaxis":"x","y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],"y0":" ","yaxis":"y","type":"box"},{"alignmentgroup":"True","boxpoints":"all","fillcolor":"rgba(255,255,255,0)","hoveron":"points","hovertemplate":"Call Answered=Call Not Answered Before Closing Time\u003cbr\u003eCall Start Time (Simulation Minute)=%{x}\u003cbr\u003eRun=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Call Not Answered Before Closing Time","line":{"color":"rgba(255,255,255,0)"},"marker":{"color":"#DA291C"},"name":"Call Not Answered Before Closing Time","offsetgroup":"Call Not Answered Before Closing Time","orientation":"v","pointpos":0,"showlegend":true,"x":[305.48414426151487,306.81126677283316,323.9416714093468,339.0413405088555,351.9759716003173,375.1835589551307,381.1863397662625,385.1140284299748,392.4453089252326,414.66615133247944,449.0621965143071,450.2591034286473,460.8534588937138,464.2251041208553,468.1432624227749,478.0155279216787,479.45700630913814,358.44693631483597,370.61307380798195,375.4142117869721,387.785144700212,388.6724441549962,397.5719606729033,399.1874132064362,419.2033632604902,427.2187879045721,430.1163708531762,431.4233889730572,453.75230890423165,466.4142321366797,472.21639229431645,450.4513349758096,452.7816563065764,456.64853533318404,478.4502313699712,428.79712903252755,431.30853813337706,431.3456340684615,458.01890859733743,467.78062400727435,468.94529105386425,469.71673839725645,478.3425019139766,389.5323913677747,430.3205935564485,440.63573157176796,458.7755649561757,464.08973606253295,467.8598069440217,470.7560126297846,472.67702179897736,358.86939770538197,379.40739770558906,381.09621571342376,384.29770239994633,408.7009589275066,411.90579567218333,426.53991616949287,433.74423208741143,438.20819102079884,450.3510834237684,456.12886519093854,456.6014171202782,460.58087858156347,461.4670917061945,461.87230212303234,473.5776041939475,476.23233031454504,373.0840443733979,392.0264318338701,396.5491426839817,396.83132344940464,403.6586139370255,411.71395538107936,417.9837664614639,439.8521610285615,447.0806314167804,452.0213760546485,461.60911650017084,469.2164278821742,393.7555018809941,407.89047168223163,409.308628787892,436.1965974239286,446.35256951029214,447.25173512888045,460.3181185445542,356.0040089045632,382.7423752104861,390.5321458150545,406.10766134002574,419.7392611235444,425.8983617477788,435.04419720414177,439.6479748709169,450.380440389753,460.88008905370526,461.84499847826066,463.95233871005314,467.86047289217385,347.4248352623671,354.6904124523086,371.3327740710522,373.9783568014603,377.7554447527288,388.79475901604883,388.93990584902326,415.6361199620773,418.58148991988577,425.8958424125482,435.8755267279781,445.66785892942937,460.0782979916051,460.20950428180896,463.26991505586653],"x0":" ","xaxis":"x","y":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],"y0":" ","yaxis":"y","type":"box"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Call Start Time (Simulation Minute)"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Run"}},"legend":{"title":{"text":"Call Answered"},"tracegroupgap":0},"title":{"text":"Patient Calls - Successful Answering over Time"},"boxmode":"group"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('0345ac56-8a05-4063-8396-7bf13ed431a9');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+<section id="create-some-summaries-and-visualisations-for-patient-stats" class="level2">
+<h2 class="anchored" data-anchor-id="create-some-summaries-and-visualisations-for-patient-stats">Create some summaries and visualisations for patient stats</h2>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
